@@ -343,8 +343,18 @@ async function submit() {
   if (!token) return;
   try {
     const r = await fetch(API + '/auth/me', { headers: { Authorization: 'Bearer ' + token } });
-    if (r.ok) window.location.href = '/dashboard.html';
-  } catch {}
+    if (r.ok) {
+      window.location.href = '/dashboard.html';
+    } else {
+      // Token invalide ou expiré → on nettoie
+      localStorage.removeItem('ak47_token');
+      localStorage.removeItem('ak47_user');
+    }
+  } catch {
+    // Erreur réseau → on nettoie pour éviter une boucle
+    localStorage.removeItem('ak47_token');
+    localStorage.removeItem('ak47_user');
+  }
 })();
 </script>
 </body>
