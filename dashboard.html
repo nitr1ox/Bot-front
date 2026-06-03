@@ -789,7 +789,7 @@ function renderBots() {
   container.innerHTML=list.map(b=>{
     const on=b.status==='running';
     const typeTag=`<span class="chip chip-blue">${typeEmoji[b.types[0]]||'⚙️'} ${b.types[0]}</span>`;
-    const cmdTags=[b.slash?`<span class="chip chip-green">/ slash`:'',b.prefix?`<span class="chip chip-yellow">${esc(b.prefixChar||'!')} prefix</span>`:''].filter(Boolean).join('');
+    const cmdTags=[b.slash?`<span class="chip chip-green">/ slash</span>`:'',b.prefix?`<span class="chip chip-yellow">${esc(b.prefixChar||'!')} prefix</span>`:''].filter(Boolean).join('');
     const logsOpen=openLogs.has(b.id);
     const logsHtml=(b.logs||[]).slice(0,20).map(l=>`
       <div class="log-line">
