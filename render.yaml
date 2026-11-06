@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: botloc
+    runtime: static
+    buildCommand: echo "window.BOTLOC_API = '$API_URL';" > config.js
+    staticPublishPath: .
+    envVars:
+      - key: API_URL
+        sync: false            # https://botloc-api.onrender.com (sans slash final)
+    headers:
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
