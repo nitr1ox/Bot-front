@@ -2,11 +2,16 @@ services:
   - type: web
     name: botloc
     runtime: static
-    buildCommand: echo "window.BOTLOC_API = '$API_URL';" > config.js
+    buildCommand: echo "pas de build"
     staticPublishPath: .
-    envVars:
-      - key: API_URL
-        sync: false            # https://botloc-api.onrender.com (sans slash final)
+    routes:
+      # Remplace botloc-api.onrender.com par l'adresse réelle de ton backend sur Render
+      - type: rewrite
+        source: /api/*
+        destination: https://botloc-api.onrender.com/api/*
+      - type: rewrite
+        source: /auth/*
+        destination: https://botloc-api.onrender.com/auth/*
     headers:
       - path: /*
         name: X-Content-Type-Options

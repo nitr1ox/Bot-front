@@ -217,10 +217,6 @@
     readBanner();
     readToken();
     startTicker();
-    if (!API) {
-      $('banner').innerHTML = '<div class="err">L’adresse de l’API n’est pas configurée (fichier config.js).</div>';
-      $('banner').hidden = false;
-    }
     try {
       const [plans, me] = await Promise.all([api('/api/plans'), api('/api/me')]);
       Object.assign(state, { plans: plans.plans, currency: plans.currency, trialCredits: plans.trialCredits, user: me.user, oauthReady: me.oauthReady });
